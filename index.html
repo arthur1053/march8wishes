@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поздравления</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #f7c1eb, #f8aee8, #FFA4EB);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .text {
+            position: absolute;
+            font-size: 50px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .typing {
+            display: none;
+            white-space: pre-line;
+            font-size: 3vh;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .final-text {
+            display: none;
+            font-size: 4vh;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .buketik {
+            display: none;
+            font-size: 4vh;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .cat {
+            display: none;
+            font-size: 4vh;
+            font-weight: bold;
+            white-space: pre-line;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span id="text1" class="text"></span>
+        <span id="text2" class="text"></span>
+        <span id="text3" class="text"></span>
+        <div id="enrtycat" class="cat">
+            <img src="https://i.pinimg.com/736x/9d/4a/49/9d4a49b2b2b9392d3f844c4dbcff52d6.jpg">
+        </div>
+        <div id="lovelyText" class="final-text">Стих для самой лучшей женщины</div>
+        <div id="doyoulikeText" class="cat">тебе понравилось?)
+            <img src="https://th.bing.com/th/id/OIP.9OEvQG1C-sbDIpYoNd0Q4gHaHa?pid=ImgDet&w=159&h=159&c=7" width="300px" height="200px">
+        </div>        
+        <div id="typingText" class="typing"></div>
+        <div class="buketik" id="buketik">
+            Виртуальный букетик для тебя
+            <img src="https://th.bing.com/th/id/OIP.OAc3Wbt9sIB5exHRANeU3wHaHg?pid=ImgDet&w=206&h=209&c=7" width="300px" height="200px">
+        </div>
+        <div class="cat" id="cat">
+            ещё один котик для тебя
+            <img src="https://www.meme-arsenal.com/memes/a9e875326f646961085c5b09188bfbef.jpg" width="300px" height="200px">
+        </div>
+        <div class="cat" id="endcat">
+            самые лучше поздравления 
+            для самой лучшей женщины!
+            <img src="https://th.bing.com/th/id/OIP.l6orBEiGioJrhaZaVso7BAHaJP?pid=ImgDet&w=159&h=198&c=7 width="300px" height="200px">
+        </div>
+    </div>
+
+    <script>
+        const elts = {
+            text1: document.getElementById("text1"),
+            text2: document.getElementById("text2"),
+            text3: document.getElementById("text3"),
+            finalText: document.getElementById("lovelyText"),
+            typingText: document.getElementById("typingText"),
+            doyoulikeText: document.getElementById("doyoulikeText"),
+            buketik: document.getElementById("buketik"),
+            cat: document.getElementById("cat"),
+            endcat: document.getElementById("endcat")
+        };
+
+        const texts = ["С 8 Марта <3", "Моя дорогая!", "У меня есть кое-что для тебя ;)"];
+
+        let textIndex = 0;
+        let currentText = elts.text1;
+        let nextText = elts.text2;
+        let fadeInterval;
+
+        function fadeText() {
+            currentText.textContent = texts[textIndex];
+            nextText.textContent = texts[(textIndex + 1) % texts.length];
+
+            currentText.style.opacity = "1";
+            nextText.style.opacity = "0";
+
+            setTimeout(() => {
+                currentText.style.opacity = "0";
+                nextText.style.opacity = "1";
+
+                textIndex = (textIndex + 1) % texts.length;
+                [currentText, nextText] = [nextText, currentText];
+
+                if (textIndex === 2) {
+                    clearInterval(fadeInterval);
+                    setTimeout(showLovelyText, 1000);
+                }
+            }, 3000);
+        }
+
+        function startCycle() {
+            textIndex = 0;
+            currentText = elts.text1;
+            nextText = elts.text2;
+            fadeText();
+            fadeInterval = setInterval(fadeText, 4000);
+        }
+
+        setTimeout(() => {
+            startCycle();
+        }, 500);
+
+        const poem = `С 8 Марта поздравляю!
+В праздничный денёк весны
+Радости, любви желаю,
+Чувств восторженных, мечты...
+
+Комплиментов, вдохновенья,
+Роз, тюльпанов и мимоз,
+Обаянья, наслажденья,
+Нежности и сладких грёз!`;
+
+        function showLovelyText() {
+            elts.text1.style.display = "none";
+            elts.text2.style.display = "none";
+
+            elts.finalText.style.display = "block";
+            elts.finalText.style.opacity = "1";
+            elts.finalText.style.animation = "fadeIn 1s ease-in-out";
+
+            setTimeout(() => {
+                hideLovelyText();
+            }, 3000);
+        }
+
+        function hideLovelyText() {
+            elts.finalText.style.animation = "fadeOut 1s ease-in-out";
+            elts.finalText.style.opacity = "0";
+            setTimeout(() => {
+                elts.finalText.style.display = "none";
+                startPoem();
+            }, 1000);
+        }
+
+        function startPoem() {
+            elts.typingText.style.display = "block";
+            elts.typingText.textContent = "";
+            elts.typingText.style.opacity = "1";
+
+            let index = 0;
+
+            function typeText() {
+                if (index < poem.length) {
+                    elts.typingText.textContent += poem[index];
+                    index++;
+                    setTimeout(typeText, 50);
+                } else {
+                    setTimeout(() => {
+                        elts.typingText.style.opacity = "0";
+                        setTimeout(() => {
+                            elts.typingText.style.display = "none";
+                            showDoyoulikeText();
+                        }, 1000);
+                    }, 3000);
+                }
+            }
+
+            typeText();
+        }
+
+        function showDoyoulikeText() {
+            elts.doyoulikeText.style.display = "block";
+            elts.doyoulikeText.style.opacity = "1";
+
+            setTimeout(() => {
+                hideDoyoulikeText();
+            }, 3000);
+        }
+
+        function hideDoyoulikeText() {
+            elts.doyoulikeText.style.opacity = "0";
+            setTimeout(() => {
+                elts.doyoulikeText.style.display = "none";
+                setTimeout(showBuketik, 1000);
+            }, 1000);
+        }
+
+        function showBuketik() {
+            elts.buketik.style.display = "block";
+            elts.buketik.style.opacity = "1";
+
+            setTimeout(() => {
+                hideBuketik();
+            }, 3000);
+        }
+
+        function hideBuketik() {
+            elts.buketik.style.opacity = "0";
+            setTimeout(() => {
+                elts.buketik.style.display = "none";
+                setTimeout(showCat, 1000);
+            }, 1000);
+        }
+
+        function showCat() {
+            console.log("Показ кота"); // Проверяем, вызывается ли showCat()
+            elts.cat.style.display = "block";
+
+            setTimeout(() => {
+                elts.cat.style.opacity = "1";
+            }, 10);
+
+            setTimeout(() => {
+                console.log("Вызываем hideCat()"); // Должно сработать через 3 секунды
+                hideCat();
+            }, 3000);
+        }
+
+        function hideCat() {
+            elts.cat.style.opacity = "0";
+            setTimeout(() => {
+                elts.cat.style.display = "none";
+                showEndcat()
+            }, 1000);
+        }
+
+        function showEndcat() {
+            elts.endcat.style.display = "block";
+            elts.endcat.style.opacity = "1";
+
+            setTimeout(() => {
+                elts.endcat.style.display = "none";
+                hideEndcat();
+            }, 3000);
+        }
+
+        function hideEndcat() {
+            elts.endcat.style.opacity = "0";
+            setTimeout(() => {
+            elts.endcat.style.display = "none"; // Может не срабатывать слишком быстро
+            console.log("Кот скрыт, ждём перед циклом");
+            setTimeout(startCycle, 2000);
+        }, 1500); // Увеличил время на 1.5 сек
+        }
+    </script>
+</body>
+</html>
